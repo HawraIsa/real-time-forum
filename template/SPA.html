@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Forum</title>
+    <link rel="stylesheet" href="/assets/style.css">
+</head>
+
+<body{{if eq .Status 404}}data-status="404"{{end}}>
+    <div id="app"></div>
+    <dialog id="404Dialog"></dialog>
+    <dialog id="loginDialog">
+        <div class="login">
+            <div class="card">
+                <div>
+                    <img src="../assets/Reboot-Logo.png" width="200">
+                    <h3>Please enter your details to login</h3>
+                    Need an account? <a onclick="loadTemplate('register');">Register</a>
+                </div>
+                <div>
+                    <form id="loginForm" onsubmit="handleLogin(event);">
+                        <label>
+                            Nickname or Email: <input type="text" name="username" required>
+                        </label>
+                        <br>
+                        <br>
+                        <label>
+                            Password <input type="password" name="password" required>
+                        </label>
+                        <br>
+                        <br>
+                        <button type="submit">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </dialog>
+    <dialog id="registerDialog">
+        <div class="card">
+            <div>
+                <img src="../assets/Reboot-Logo.png" width="200">
+                <h2>Register</h2>
+                Already have an account? <a onclick="loadTemplate('login')">Login</a>
+            </div>
+            <form method="POST" id="registerForm" onsubmit="handleRegister(event);">
+                <label>
+                    Nickname:
+                    <input type="text" name="username" required>
+                </label>
+                <br>
+                <label>
+                    Age:
+                    <input type="number" name="age" required>
+                </label>
+                <br>
+                <label>
+                    Gender:
+                    <select name="gender" required>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </label>
+                <br>
+                <label>
+                    First Name:
+                    <input type="text" name="first_name" required>
+                </label>
+                <br>
+                <label>
+                    Last Name:
+                    <input type="text" name="last_name" required>
+                </label>
+                <br>
+                <label>
+                    E-mail:
+                    <input type="email" name="email" required>
+                </label>
+                <br>
+                <label>
+                    Password:
+                    <input type="password" name="password" required>
+                </label>
+                <br>
+                <input type="submit" value="Register">
+            </form>
+        </div>
+    </dialog>
+    <dialog id="addPostDialog">
+        <button id="closeDialog" onclick="addPostDialog.close();">X</button>
+        <form onsubmit="postSubmitted(event)">
+            <label>
+                post title
+                <input name="title" required>
+            </label>
+            <br>
+            <br>
+            <label>
+                post category<br>
+                <div id="filter">
+                    <label>
+                        <input type="checkbox" name="cat" value="1">
+                        Tech
+                        <input type="checkbox" name="cat" value="2">
+                        Sport
+                        <input type="checkbox" name="cat" value="3">
+                        News
+                        <input type="checkbox" name="cat" value="4">
+                        Culture
+                        <input type="checkbox" name="cat" value="5">
+                        Cars
+                        <input type="checkbox" name="cat" value="6">
+                        Nature
+                        <input type="checkbox" name="cat" value="7">
+                        Art
+                    </label><br>
+                </div>
+            </label>
+            <br>
+            <label>
+                post content
+                <textarea name="content" required rows="3"></textarea>
+            </label>
+            <br>
+            <input type="submit" value="post">
+        </form>
+    </dialog>
+    
+    <div id="notifications"></div>
+</body>
+<script src="/assets/app.js"></script>
+<script src="/assets/templates.js"></script>
+<script src="/assets/user.js"></script>
+<script src="/assets/posts.js"></script>
+<script src="/assets/websocket.js"></script>
+<script src="/assets/chat.js"></script>
+<script src="/assets/notifications.js"></script>
+
+</html>
